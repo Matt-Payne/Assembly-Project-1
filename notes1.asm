@@ -1,12 +1,12 @@
 .text
-.global main
+.globl main
 
 main:
 #initialize var
-li $t0,0
-li $t4,-1
-li $t3,0
-la $a0,scores
+li $t0,0 #score counter
+li $t4,-1 #holder terminator marker
+li $t3,0 # temp
+la $a0,scores # address of list of scores
 
 get_score:
 lw $t2,0($a0) # load the first score into t2
@@ -34,6 +34,7 @@ li $v0,1 #load code to print the num
 syscall
 li $v0,4
 la $a0,remstr
+syscall
 mfhi $a0
 move $a2,$a0
 li $v0,1
@@ -43,8 +44,8 @@ syscall
 
 .data
 scores: .word 145,101,97,92,84,100,89,90,66,78,94,-124,82,79,-4,55,-1
-avgstr: .asciiz "The average is"
-remstr: .asciiz "with a remainder of"
+avgstr: .asciiz "The average is "
+remstr: .asciiz " with a remainder of "
 
 
 #end nop
