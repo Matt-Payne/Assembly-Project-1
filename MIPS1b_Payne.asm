@@ -31,12 +31,12 @@ div $t1,$t0 # divide with lo and hi
 mflo $a0 #move the quotient from lo to a pointer
 move $a1,$a0 # saving quotient in a1
 li $v0,1 #load code to print the num
+syscall ##print 
+li $v0,4 #load op code to print string
+la $a0,remstr # load remainder address
 syscall
-li $v0,4
-la $a0,remstr
-syscall
-mfhi $a0
-move $a2,$a0
+mfhi $a0 # move hi to that address
+move $a2,$a0 # move hi into a2
 li $v0,1
 syscall
 
