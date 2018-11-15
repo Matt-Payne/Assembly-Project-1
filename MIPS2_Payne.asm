@@ -8,7 +8,7 @@ main:
     addi $t8,$0,1
     la $t9,array        # saving for printing
     la  $t0, array      # save the base address to compare later
-    add $t0, $t0, 88    # $t0 = starting address + 88 slots       
+    add $t0, $t0, 84    # $t0 = starting address + 84 slots    84/4   
     addi $t5, $0, 0
     j outerLoop
     
@@ -35,15 +35,15 @@ checker:
     addi $a0, $a0, 4            # move to next value in array
     bne  $a0, $t0, innerLoop    # check if array address is not 0 to zero to move into innerloop
     bne  $t1, $0, outerLoop    # check if checker value is 0, move into outerloop to go through again
-
+    
 print:
- lw $a0, 0($t9)
- addi $v0, $0,1
+ lw $a0, 0($t9) # load base address, then the next addresss each time
+ addi $v0, $0,1 # op code for address
  syscall
- addi $t9, $t9,4
- li $a1,32  # 32 is ASCII for Space
- li $v0,11  # 11 is syscall for printing a char
- syscall 
- addi $t8,$t8,1
- bne $t8,21,print
+ li $v0,4 #load op code to print string
+ la $a0,space # load space
+ syscall # print
+ addi $t8,$t8,1 # add 1 to counter
+ addi $t9, $t9,4 # add 4 to address 
+ bne $t8,23,print # loop back around if not at end
  
