@@ -2,13 +2,16 @@
 .globl main
 
 main:
-
-li $v0,4
+li $t7,97 # a to compare
+li $t6,98 # b to compare
 la $a0,askstr1 # grab floating number
+li $v0,4
 syscall
 
-li $v0,12
+li $v0,12 #reads in char, 97 for a 98 for b
 syscall #print
+
+move $t0,$v0
 
 li $v0,4
 la $a0, newline #new line
@@ -23,7 +26,7 @@ li $v0,6
 syscall #print 
 mov.s $f4,$f0 #move first number into floating reg
 
-
+beq $t0,$t6,conC
 
 
 
@@ -36,7 +39,7 @@ mov.s $f12,$f3
 li $v0, 2
 syscall
 
-conC #from C to F
+conC: #from C to F
 l.s $f1, c1 # Load Floating Point Single conversion factor 1
 l.s $f2, c2 # Load Floating Point Single conversion factor 2
 mul.s $f3, $f0, $f2 # C*180/100
