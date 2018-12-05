@@ -52,10 +52,13 @@ syscall # print value in $f12
 .data
 askstr1: .asciiz "a. Convert Fahrenheit to Celsius, or b. Convert Celsius to Fahrenheit."
 askstr2: .asciiz "Enter a floating temperature "
-sumstr: .asciiz "\nTheir sum is : "
+coldstr: .asciiz "\nThat is COLD "
+hotstr: .asciiz "\nThat is HOT "
+hotF: .float 120
 newline: .asciiz "\n"
 c1: .float 32 # conversion factor 1
 c2: .float 1.8 # conversion factor 2
-c3: .float 0.0 # cutoff for "cold" temperature
+coldF: .float 0.0 # cutoff for "cold" temperature
+
 
 
