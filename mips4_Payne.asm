@@ -27,17 +27,21 @@ syscall #print
 mov.s $f4,$f0 #move first number into floating reg
 
 beq $t0,$t6,conC
-
+j convF
 
 
 convF:
 l.s $f1,c1
 l.s $f2, c2
+l.s $f11,oneH
+l.s $f10,oneE
+div.s $f9,$f11,$f10
 sub.s $f0,$f0,$f1
-mul.s $f3,$f0,$f2
+mul.s $f3,$f0,$f9
 mov.s $f12,$f3
 li $v0, 2
 syscall
+
 
 conC: #from C to F
 l.s $f1, c1 # Load Floating Point Single conversion factor 1
@@ -59,6 +63,8 @@ newline: .asciiz "\n"
 c1: .float 32 # conversion factor 1
 c2: .float 1.8 # conversion factor 2
 coldF: .float 0.0 # cutoff for "cold" temperature
+oneH: .float 100.0
+oneE: .float 180.0
 
 
 
